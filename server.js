@@ -10,13 +10,12 @@ const PORT = 3001; // Port for the Express server
 app.use(cors());
 
 // PostgreSQL Pool Configuration
+
 const pool = new Pool({
-    user: 'postgres',         // PostgreSQL user
-    host: 'localhost',        // Host where PostgreSQL is running
-    database: 'img1',        // Database name
-    password: 'arisha01',     // Password for the PostgreSQL user
-    port: 5433,               // PostgreSQL port
-});
+    connectionString: process.env.POSTGRES_URL,
+})
+                 
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
