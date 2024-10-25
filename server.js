@@ -12,9 +12,13 @@ app.use(cors());
 // PostgreSQL Pool Configuration
 
 const pool = new Pool({
-    connectionString: process.env.POSTGRES_URL,
-})
-                 
+    user: 'postgres',
+    host: 'localhost', // Your machine’s public IP address
+    database: 'fourth',
+    password: 'arisha01',
+    port: 5433,
+   
+});              
 
 
 // Middleware to parse JSON bodies
@@ -30,7 +34,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
     const imageBuffer = req.file ? req.file.buffer : null; // Get image buffer
 
     try {
-        const query = 'INSERT INTO user1 (name, image) VALUES ($1, $2) RETURNING *'; // Changed table name to 'user1'
+        const query = 'INSERT INTO img (name, image) VALUES ($1, $2) RETURNING *'; // Changed table name to 'user1'
         const values = [name, imageBuffer]; // Include image buffer
 
         const result = await pool.query(query, values);
@@ -44,7 +48,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 // Route to Retrieve Records
 app.get('/records', async (req, res) => {
     try {
-        const query = 'SELECT id, name, image FROM user1'; // Changed table name to 'user1'
+        const query = 'SELECT id, name, image FROM img'; // Changed table name to 'user1'
         const result = await pool.query(query);
 
         // Convert images to Base64 format
