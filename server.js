@@ -4,7 +4,7 @@ const cors = require('cors');
 const multer = require('multer');
 
 const app = express();
-const PORT = 3001; // Port for the Express server
+ // Port for the Express server
 
 // Enable CORS maine copy paste kis tha thoda kuch syntax error aaye the so i give to chatgpt okay
 app.use(cors());
@@ -71,8 +71,8 @@ process.on('exit', () => {
 });
 
 // Server Setup
+const PORT = process.env.PORT || 3001; // Use PORT from environment variables or fallback to 3001
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-
-
